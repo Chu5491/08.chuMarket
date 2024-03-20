@@ -50,6 +50,7 @@ public class UserRestController {
 		System.out.println(this.getClass());
 	}
 	
+	//테스트 완료
 	@RequestMapping(value="/json/getUser", method=RequestMethod.GET )
 	public User getUser( @RequestParam("userId") String userId) throws Exception 
 	{
@@ -60,6 +61,7 @@ public class UserRestController {
 		return user;
 	}
 	
+	//테스트 완료
 	@RequestMapping( value="/json/login", method=RequestMethod.POST )
 	public User login(@RequestBody User user , HttpSession session ) throws Exception
 	{
@@ -74,7 +76,8 @@ public class UserRestController {
 		return dbUser;
 	}
 	
-	@RequestMapping(value="/json/checkDuplication", method=RequestMethod.POST)
+	//테스트 완료
+	@RequestMapping(value="/json/checkDuplication", method=RequestMethod.GET)
 	public String checkDuplication( @RequestParam("userId") String userId , Model model ) throws Exception
 	{
 		
@@ -82,14 +85,13 @@ public class UserRestController {
 		//Business Logic
 		boolean result=userService.checkDuplication(userId);
 		// Model 과 View 연결
-		model.addAttribute("result", new Boolean(result));
-		model.addAttribute("userId", userId);
 
-		return "[\""+ result +"\"]";
+		return "{\"result\": \""+result+"\"}";
 	}
 	
+	//테스트 완료
 	@RequestMapping(value="/json/listUser", method=RequestMethod.POST)
-	public List listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception
+	public List listUser( @ModelAttribute("search") Search search ) throws Exception
 	{
 		
 		System.out.println("/user/json/listUser : GET / POST");
